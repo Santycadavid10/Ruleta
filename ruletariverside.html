@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Riverside</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="esquina"><img src="riverside.png" alt=""></div>
+    <div class="container">
+        <div class="spinBtn">Jugar</div>
+        <div class="wheel">
+            <div class="number" style="--i:1;--clr:#db7093"><span>Descuento 50%</span></div>
+            <div class="number" style="--i:2;--clr:#20b2aa"><span>paga2 lleva3</span></div>
+            <div class="number" style="--i:3;--clr:#d63e92"><span>Katie 50%</span></div>
+            <div class="number" style="--i:4;--clr:#daa520"><span>HotfMister 30%</span></div>
+            <div class="number" style="--i:5;--clr:#ff430f"><span>Fatprimo 20%</span></div>
+            <div class="number" style="--i:6;--clr:#ff7f50"><span>superior a 120$ 50%</span></div>
+            <div class="number" style="--i:7;--clr:#3cb371"><span>superior a 50$ 30%</span></div>
+            <div class="number" style="--i:8;--clr:#4169e1"><span>Escoje tu la promo</span></div>
+        </div>
+
+    </div>
+    <audio id="ruletaSound" src="ruleta.mp3" preload="auto"></audio>
+    ,<script>
+        let wheel = document.querySelector(".wheel");
+let spinBtn = document.querySelector(".spinBtn");
+let mensaje = document.createElement("div");
+mensaje.id = "mensaje"; // Asignar el ID al mensaje
+document.body.appendChild(mensaje);
+let ruletaSound = document.getElementById("ruletaSound");
+mensaje.style.position = "absolute";
+mensaje.style.top = "30%"; // Centra verticalmente
+mensaje.style.left = "50%"; // Centra horizontalmente
+mensaje.style.transform = "translate(-50%, -50%)"; // Centra en ambos ejes
+mensaje.style.width = "100%"; // Ocupar todo el ancho
+mensaje.style.textAlign = "center"; // Centra el texto
+mensaje.style.fontSize = "5em"; // Tamaño de fuente grande
+mensaje.style.color = "#fff"; // Color del texto
+mensaje.style.opacity = "0"; // Comienza invisible
+mensaje.style.transition = "opacity 0.5s ease"; // Transición de opacidad
+mensaje.style.backgroundColor = "rgba(0, 0, 0, 0.7)"; // Fondo semi-transparente
+mensaje.style.padding = "20px"; // Espaciado alrededor del texto
+mensaje.style.borderRadius = "10px"; // Bordes redondeados
+
+spinBtn.onclick = function() {
+    let value = Math.ceil(Math.random() * 3600); // Girar entre 3600 y 7200 grados
+    wheel.style.transform = "rotate(" + value + "deg)";
+    // Reproducir el sonido de la ruleta
+    ruletaSound.currentTime = 0; // Reiniciar el sonido
+    ruletaSound.play();
+    // Calcular el sector al que se detiene la ruleta
+    setTimeout(() => {
+        let actualAngle = value % 360; // Obtener el ángulo efectivo (0-360)
+        let sectorIndex = Math.floor(((actualAngle + 22.5) % 360) / 45); // +22.5 para centrar el puntero
+
+
+        // Mensaje según el sector
+        switch (sectorIndex) {
+            case 0:
+                mensaje.textContent = "¡Toda la tienda al 50%!";
+                break;
+            case 1:
+                mensaje.textContent = "¡Escoje la promo :)!";
+                break;
+            case 2:
+                mensaje.textContent = "¡Compras mayores a 50$ descuento del 30%!";
+                break;
+            case 3:
+                mensaje.textContent = "¡Compras mayores a 120$ descuento del 50%!";
+                break;
+            case 4:
+                mensaje.textContent = "¡Prendas Fatprimo con descuento del 20%!";
+                break;
+            case 5:
+                mensaje.textContent = "¡Prendas HotfMister con descuento del 30%!";
+                break;
+            case 6:
+                mensaje.textContent = "¡Prendas Katie con descuento del 50%!";
+                break;
+            case 7:
+                mensaje.textContent = "¡Paga 2 lleva 3  por el mismo valor$!";
+                break;
+            default:
+                mensaje.textContent = "¡Intenta de nuevo!";
+                break;
+        }
+        // Detener el sonido después de 5 segundos
+         // Mostrar el mensaje
+         mensaje.style.opacity = 1; // Hacer visible
+        setTimeout(() => {
+            mensaje.style.opacity = 0; // Hacer invisible después de 2 segundos
+        }, 5000);
+        
+            ruletaSound.pause();
+        
+    }, 5000); // Tiempo para esperar antes de mostrar el mensaje
+};
+
+    </script>
+   
+</body>
+</html>

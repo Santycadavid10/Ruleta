@@ -21,27 +21,13 @@
         </div>
 
     </div>
+    <div id="mensaje"></div>
     <audio id="ruletaSound" src="ruleta.mp3" preload="auto"></audio>
     ,<script>
         let wheel = document.querySelector(".wheel");
-let spinBtn = document.querySelector(".spinBtn");
-let mensaje = document.createElement("div");
-mensaje.id = "mensaje"; // Asignar el ID al mensaje
-document.body.appendChild(mensaje);
-let ruletaSound = document.getElementById("ruletaSound");
-mensaje.style.position = "absolute";
-mensaje.style.top = "30%"; // Centra verticalmente
-mensaje.style.left = "50%"; // Centra horizontalmente
-mensaje.style.transform = "translate(-50%, -50%)"; // Centra en ambos ejes
-mensaje.style.width = "100%"; // Ocupar todo el ancho
-mensaje.style.textAlign = "center"; // Centra el texto
-mensaje.style.fontSize = "5em"; // Tamaño de fuente grande
-mensaje.style.color = "#fff"; // Color del texto
-mensaje.style.opacity = "0"; // Comienza invisible
-mensaje.style.transition = "opacity 0.5s ease"; // Transición de opacidad
-mensaje.style.backgroundColor = "rgba(0, 0, 0, 0.7)"; // Fondo semi-transparente
-mensaje.style.padding = "20px"; // Espaciado alrededor del texto
-mensaje.style.borderRadius = "10px"; // Bordes redondeados
+        let spinBtn = document.querySelector(".spinBtn");
+        let mensaje = document.getElementById("mensaje");
+        let ruletaSound = document.getElementById("ruletaSound");
 
 spinBtn.onclick = function() {
     let value = Math.ceil(Math.random() * 3600); // Girar entre 3600 y 7200 grados
@@ -85,8 +71,6 @@ spinBtn.onclick = function() {
                 mensaje.textContent = "¡Intenta de nuevo!";
                 break;
         }
-        // Detener el sonido después de 5 segundos
-         // Mostrar el mensaje
          mensaje.style.opacity = 1; // Hacer visible
         setTimeout(() => {
             mensaje.style.opacity = 0; // Hacer invisible después de 2 segundos
